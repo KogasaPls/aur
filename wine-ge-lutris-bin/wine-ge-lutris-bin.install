@@ -1,0 +1,30 @@
+## arg 1:  the new package version
+post_install() {
+  setup
+  show_symlink_warning
+}
+
+setup() {
+    if tput setaf 0 &>/dev/null; then
+      ALL_OFF="$(tput sgr0)"
+      BLUE="${BOLD}$(tput setaf 4)"
+      YELLOW="${BOLD}$(tput setaf 3)"
+  else
+      ALL_OFF="\033[1;0m"
+      BLUE="${BOLD}\033[1;34m"
+      YELLOW="${BOLD}\033[1;33m"
+  fi
+  readonly ALL_OFF BLUE YELLOW
+
+}
+
+show_symlink_warning() {
+  if [ -L "$HOME/.local/share/lutris/runners/wine/wine-ge-lutris" ]; then
+    return
+  fi
+
+  warning="${YELLOW}To use this package with Lutris, create a symlink to this Wine installation in your Lutris runners directory. e.g.,$ALL_OFF"
+  message="$> ${BLUE} ln -s /usr/share/wine-ge-lutris \$HOME/.local/share/lutris/runners/wine/$ALL_OFF"
+
+  printf "%s\n%s\n" "$warning" "$message"
+}

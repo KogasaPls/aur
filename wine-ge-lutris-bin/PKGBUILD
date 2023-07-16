@@ -1,0 +1,69 @@
+# Maintainer: Kogasa <kogasapls at gmail dot com>
+pkgver=8.10
+_release_tag=GE-Proton8-10
+_sha512sum=a8e7ff41285c18fcfd927686a6b18e536d09d1295baafc4735679442f61687cf30753cb541f5abb7c435a1aa14bffb59ebb63c0163933776e306fdd06576f155
+
+_archive_filename="wine-lutris-$_release_tag-x86_64.tar.xz"
+_pkgname='wine-ge-lutris'
+
+pkgname="${_pkgname}-bin"
+pkgrel=1
+pkgdesc="GloriousEggroll's custom build of wine, made to use with Lutris."
+install="$pkgname.install"
+arch=('x86_64' 'x86_64_v3')
+options=(!strip)
+url="https://github.com/GloriousEggroll/wine-ge-custom"
+license=('LGPL')
+provides=('wine-ge-lutris')
+conflicts=('wine-ge-lutris')
+replaces=('wine-ge-lutris')
+source=(
+  "$_archive_filename::https://github.com/GloriousEggroll/wine-ge-custom/releases/latest/download/$_archive_filename"
+)
+sha512sums=(
+  "$_sha512sum"
+)
+
+depends=(
+  attr lib32-attr
+  fontconfig lib32-fontconfig
+  libxcursor lib32-libxcursor
+  libxrandr lib32-libxrandr
+  libxi lib32-libxi
+  gettext lib32-gettext
+  freetype2 lib32-freetype2
+  libpcap lib32-libpcap
+  desktop-file-utils
+)
+
+optdepends=(
+  lutris
+  giflib lib32-giflib
+  gnutls lib32-gnutls
+  v4l-utils lib32-v4l-utils
+  libpulse lib32-libpulse
+  alsa-plugins lib32-alsa-plugins
+  alsa-lib lib32-alsa-lib
+  libxcomposite lib32-libxcomposite
+  libxinerama lib32-libxinerama
+  opencl-icd-loader lib32-opencl-icd-loader
+  libva lib32-libva
+  gtk3 lib32-gtk3
+  gst-plugins-base-libs lib32-gst-plugins-base-libs
+  gst-plugins-good lib32-gst-plugins-good
+  vulkan-icd-loader lib32-vulkan-icd-loader
+  sdl2 lib32-sdl2
+  libgphoto2
+  ffmpeg
+  dosbox
+)
+
+package() {
+  cd "$srcdir" || exit 1
+
+  _filename="lutris-$_release_tag-x86_64"
+  _install_path="/usr/share/wine-ge-lutris"
+
+  install -dm755 "$pkgdir$_install_path"
+  cp -r "$_filename"/* "$pkgdir$_install_path"
+}
