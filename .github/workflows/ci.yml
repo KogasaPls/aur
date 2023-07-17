@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get latest version
-        uses: KogasaPls/aur_updater@main
+        uses: KogasaPls/aur_updater@36bd8fe2db6734ce46ff56055e1c36c0334efe62
         with:
           pkgname: 'wine-ge-lutris-bin'
       - name: Print latest version
