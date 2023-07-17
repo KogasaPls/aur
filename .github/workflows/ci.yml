@@ -1,0 +1,12 @@
+on: workflow_dispatch
+
+jobs:
+  get_latest_version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest version
+        uses: KogasaPls/aur_updater@main
+        with:
+          aur-repo: 'wine-ge-lutris-bin'
+      - name: Print latest version
+        run: echo ${{ steps.get_latest_version.outputs.pkgver }}
