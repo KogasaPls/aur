@@ -7,6 +7,6 @@ jobs:
       - name: Get latest version
         uses: KogasaPls/aur_updater@main
         with:
-          aur-repo: 'wine-ge-lutris-bin'
+          aur-package: 'wine-ge-lutris-bin'
       - name: Print latest version
         run: echo ${{ steps.get_latest_version.outputs.pkgver }}
